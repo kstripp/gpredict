@@ -884,6 +884,7 @@ static gboolean
     GtkRotCtrl *ctrl = GTK_ROT_CTRL (data);
     gdouble rotaz=0.0, rotel=0.0;
     gdouble setaz=0.0, setel=45.0;
+    gdouble cmdaz=0.0, cmdel=45.0;
     gchar *text;
     gboolean error = FALSE;
     sat_t sat_working, *sat;
