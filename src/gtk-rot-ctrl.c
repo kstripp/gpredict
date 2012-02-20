@@ -1044,9 +1044,22 @@ static gboolean
                 }
             }
         
+			/* If azimuth position is > 180 from current position, send incremental command */
+
+			if(fabs(setaz - rotaz) >= 180.0){
+				if(setaz > rotaz){
+					cmdaz = rotaz + 90;
+				}else{
+					cmdaz = rotaz - 90;
+				}
+			}else{
+				cmdaz = setaz;
+			}
+			cmdel = setel;
+
             /* send controller values to rotator device */
             /* this is the newly computed value which should be ahead of the current position */
-            if (!set_pos (ctrl, setaz, setel)) {
+            if (!set_pos (ctrl, cmdaz, cmdel)) {
                 error = TRUE;
             } else {
                 gtk_rot_knob_set_value (GTK_ROT_KNOB (ctrl->AzSet), setaz);
